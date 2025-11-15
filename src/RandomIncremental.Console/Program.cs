@@ -1,12 +1,9 @@
 ﻿using RandomIncremental;
 
-Game gameloop = new()
-{
-    TickRate = 1000
-};
+var game = new Game();
 
-gameloop.Start();
+game.Start();
 
 Console.WriteLine("Game started. Press Enter to stop.");
 Console.ReadLine();
-gameloop.Stop();
+game.Stop();

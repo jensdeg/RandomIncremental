@@ -2,7 +2,6 @@
 
 public class Game
 {
-    public uint TickRate { get; set; } = 100;
     public readonly GameStats GameStats = new();
 
     private readonly List<TickableBase> _tickables;
@@ -27,7 +26,7 @@ public class Game
         }
     }
 
-    public void Start() => _timer = new Timer(_ => Tick(), null, 0, TickRate);
+    public void Start() => _timer = new Timer(_ => Tick(), null, 0, GameStats.TickRate);
 
     public void Stop() => _timer?.Dispose();
 
@@ -37,7 +36,7 @@ public class Game
 public abstract class TickableBase
 {
     protected GameStats GameStats { get; private set; } = null!;
-    public virtual uint Priority => 0;
+    public virtual uint Priority => 1;
     public virtual void OnInitialized() { }
     public abstract void OnTick();
     public void SetGameStats(GameStats stats) => GameStats = stats;
