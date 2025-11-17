@@ -1,0 +1,24 @@
+﻿@page "/"
+
+<PageTitle>Main</PageTitle>
+@inject GameStats Stats
+
+@Stats.Value
+
+
+@code{
+    private Timer? _timer;
+
+    protected override void OnInitialized()
+    {
+        uint refreshRate = Stats.TickRate / 10 < 1
+            ? 1
+            : Stats.TickRate / 10;
+
+        _timer = new Timer(
+            _ => InvokeAsync(StateHasChanged),
+            null,
+            0,
+            refreshRate);
+    }
+}
